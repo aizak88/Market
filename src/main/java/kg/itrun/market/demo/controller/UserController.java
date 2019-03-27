@@ -1,5 +1,6 @@
 package kg.itrun.market.demo.controller;
 
+import kg.itrun.market.demo.entity.Roles;
 import kg.itrun.market.demo.entity.User;
 import kg.itrun.market.demo.repository.RolesRepository;
 import kg.itrun.market.demo.repository.UserRepository;
@@ -27,18 +28,20 @@ public class UserController {
     }
 
     @GetMapping("/signup")
-    public String showSignUpForm(User user){
+    public String showSignUpForm(User user, Roles roles){
         return "add-user";
     }
 
     @PostMapping("/adduser")
-    public String addUser(@Valid User user, BindingResult result, Model model){
+    public String addUser(@Valid User user,@Valid Roles roles, BindingResult result, Model model){
         if (result.hasErrors()){
             return "add-user";
         }
 
         userRepository.save(user);
+        rolesRepository.save(roles);
         model.addAttribute("users", userRepository.findAll());
+        model.addAttribute("roles", rolesRepository.findAll());
         return "index";
     }
 

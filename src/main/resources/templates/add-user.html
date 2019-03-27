@@ -32,10 +32,9 @@
         <option value="">Выберите роль</option>
         <option th:each="roles : ${roles}"
                 th:value="${roles.id}"
-                th:text="${roles.roles_name}"></option>
+                th:text="${roles.role_name}"></option>
 
     </select>
-
     <input type="submit" value="Save">
 </form>
 </body>

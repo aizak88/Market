@@ -31,7 +31,7 @@
                 <td th:text="${user.login}"></td>
                 <td th:text="${user.email}"></td>
                 <td th:text="${user.phone}"></td>
-                <td th:text="${user.role.role_name}"></td>
+                <td th:text="${user.roles.role_name}"></td>
                 <td><a th:href="@{/edit/{id}(id=${user.id})}">Edit</a></td>
                 <td><a th:href="@{/delete/{id}(id=${user.id})}">Delete</a></td>
             </tr>
