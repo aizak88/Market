@@ -18,9 +18,9 @@ public class Goods {
 
     @ManyToOne
     @JoinColumn(name = "price_id")
-    private int price_id;
+    private Prices price_id;
 
     @ManyToOne
     @JoinColumn(name = "good_type_id")
-    private int good_type_id;
+    private Goods_types good_type_id;
 }
