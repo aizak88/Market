@@ -1,8 +1,7 @@
 package kg.itrun.market.demo.controller;
 
-import kg.itrun.market.demo.entity.Roles;
 import kg.itrun.market.demo.entity.User;
-import kg.itrun.market.demo.repository.RolesRepository;
+import kg.itrun.market.demo.repository.RoleRepository;
 import kg.itrun.market.demo.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -17,10 +16,11 @@ import javax.validation.Valid;
 @Controller
 public class UserController {
     @Autowired
-    private RolesRepository rolesRepository;
+    private RoleRepository roleRepository;
 
     @Autowired
     private UserRepository userRepository;
+
     @GetMapping("/")
     public String getMainPage(Model model){
         model.addAttribute("users", userRepository.findAll());
@@ -28,20 +28,20 @@ public class UserController {
     }
 
     @GetMapping("/signup")
-    public String showSignUpForm(User user, Roles roles){
+    public String showSignUpForm(User user, Model model){
+        model.addAttribute("roles", roleRepository.findAll());
         return "add-user";
     }
 
     @PostMapping("/adduser")
-    public String addUser(@Valid User user,@Valid Roles roles, BindingResult result, Model model){
+    public String addUser(@Valid User user, BindingResult result, Model model){
         if (result.hasErrors()){
             return "add-user";
         }
 
         userRepository.save(user);
-        rolesRepository.save(roles);
         model.addAttribute("users", userRepository.findAll());
-        model.addAttribute("roles", rolesRepository.findAll());
+
         return "index";
     }
 

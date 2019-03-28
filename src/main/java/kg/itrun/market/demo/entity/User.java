@@ -20,6 +20,6 @@ public class User {
     private int is_active;
     @ManyToOne
     @JoinColumn(name = "role_id" )
-    private Roles roles;
+    private Role role;
 
 }

@@ -31,7 +31,7 @@
                 <td th:text="${user.login}"></td>
                 <td th:text="${user.email}"></td>
                 <td th:text="${user.phone}"></td>
-                <td th:text="${user.roles.role_name}"></td>
+                <td th:text="${user.role.role_name}"></td>
                 <td><a th:href="@{/edit/{id}(id=${user.id})}">Edit</a></td>
                 <td><a th:href="@{/delete/{id}(id=${user.id})}">Delete</a></td>
             </tr>
@@ -39,6 +39,33 @@
         </table>
     </div>
     <p><a href="/signup">Add a new user</a></p>
+</div>
+<div th:switch="${goods}">
+    <table class="table table-dark">
+        <thead>
+        <tr>
+            <th scope="col">Товар</th>
+            <th scope="col">в наличии</th>
+            <th scope="col">Инфо</th>
+            <th scope="col">Цена</th>
+            <th scope="col">Тип продукта</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="goods :${goods}">
+            <td th:text="${goods.name}"></td>
+            <td th:text="${goods.is_active}"></td>
+            <td th:text="${goods.info}"></td>
+            <td th:text="${goods.goods_type_id.type_name}"></td>
+            <td th:text="${goods.price_id.price}"></td>
+            <td><a th:href="@{/edit/{id}(id=${goods.id})}">Edit</a></td>
+            <td><a th:href="@{/delete/{id}(id=${goods.id})}">Delete</a></td>
+        </tr>
+        </tbody>
+    </table>
+<div>
+    <p><a href="/addgoods">Add goods</a> </p>
+</div>
 </div>
 </body>
 </html>
