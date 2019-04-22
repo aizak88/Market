@@ -12,14 +12,15 @@ public class User {
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "user_id")
     private long id;
+    private String name;
+    private String phone;
     private String login;
     private String pwd;
-    private String name;
-    private String email;
-    private String phone;
+    //Пока не нужно если понадобиться то нужно будет добавить его еще в HTML
+    /*private String email;
     private int is_active;
     @ManyToOne
     @JoinColumn(name = "role_id" )
-    private Role role;
+    private Role role; */
 
 }

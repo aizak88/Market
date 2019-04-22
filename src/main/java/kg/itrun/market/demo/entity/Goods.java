@@ -12,8 +12,11 @@ public class Goods {
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "goods_id")
     private int id;
-    private String goods_name;
-    private int is_active;
+    private String goodsName;
+    private float count;
+    private float price;
+
+ /*   private int is_active;
     private String info;
 
     @ManyToOne
@@ -23,4 +26,5 @@ public class Goods {
     @ManyToOne
     @JoinColumn(name = "good_type_id")
     private Goods_types goods_type_id;
+    */
 }

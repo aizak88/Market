@@ -1,6 +1,7 @@
 package kg.itrun.market.demo.controller;
 
 import kg.itrun.market.demo.entity.User;
+import kg.itrun.market.demo.repository.GoodsRepository;
 import kg.itrun.market.demo.repository.RoleRepository;
 import kg.itrun.market.demo.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,21 +18,28 @@ import javax.validation.Valid;
 public class UserController {
     @Autowired
     private RoleRepository roleRepository;
+    @Autowired
+    private GoodsRepository goodsRepository;
 
     @Autowired
     private UserRepository userRepository;
 
-    @GetMapping("/")
+    @GetMapping("/user")
     public String getMainPage(Model model){
         model.addAttribute("users", userRepository.findAll());
+        model.addAttribute("goods", goodsRepository.findAll());
         return "index";
     }
-
     @GetMapping("/signup")
+    public String showSignUpForm(User user, Model model){
+       // model.addAttribute("users", userRepository.findAll());
+        return "add-user";
+    }
+    /*@GetMapping("/signup")
     public String showSignUpForm(User user, Model model){
         model.addAttribute("roles", roleRepository.findAll());
         return "add-user";
-    }
+    }*/
 
     @PostMapping("/adduser")
     public String addUser(@Valid User user, BindingResult result, Model model){
@@ -41,6 +49,7 @@ public class UserController {
 
         userRepository.save(user);
         model.addAttribute("users", userRepository.findAll());
+        model.addAttribute("goods", goodsRepository.findAll());
 
         return "index";
     }
@@ -61,6 +70,7 @@ public class UserController {
         }
         userRepository.save(user);
         model.addAttribute("users", userRepository.findAll());
+        model.addAttribute("goods", goodsRepository.findAll());
         return "index";
     }
 
@@ -71,6 +81,7 @@ public class UserController {
 
         userRepository.delete(user);
         model.addAttribute("users", userRepository.findAll());
+        model.addAttribute("goods", goodsRepository.findAll());
         return "index";
     }
 
